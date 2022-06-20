@@ -24,4 +24,6 @@ pokemonRouter.get("/", async (req, res) => {
   }
 });
 
+
+
 export default pokemonRouter;
