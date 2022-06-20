@@ -1,5 +1,6 @@
 import express from "express";
 import { getClient } from "../db";
+import { PokemonEasy } from "../models/Pokemon";
 
 const pokemonRouter = express.Router();
 
@@ -14,7 +15,7 @@ pokemonRouter.get("/", async (req, res) => {
     const client = await getClient();
     const results = await client
       .db()
-      .collection<any>("shoutouts")
+      .collection<PokemonEasy>("")
       .find()
       .toArray();
     res.json(results);
