@@ -4,7 +4,7 @@ import { PokemonEasy } from "../models/Pokemon";
 
 const pokemonRouter = express.Router();
 
-const errorResponse = (error: any, res: any) => {
+export const errorResponse = (error: any, res: any) => {
   console.error("FAIL", error);
   res.status(500).json({ message: "Internal Server Error" });
 };
