@@ -24,20 +24,6 @@ pokemonRouter.get("/", async (req, res) => {
   }
 });
 
-pokemonRouter.get("/questions", async (req, res) => {
-  try {
-    const client = await getClient();
-    const results = await client
-      .db()
-      .collection<PokemonEasy>("")
-      .find()
-      .toArray();
-    res.json(results);
-  } catch (err) {
-    errorResponse(err, res);
-  }
-});
-
 pokemonRouter.get("/profile", async (req, res) => {
   try {
     const client = await getClient();
