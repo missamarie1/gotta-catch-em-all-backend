@@ -20,6 +20,10 @@ accountRouter.get("/account/:uid", async (req, res) => {
   }
 });
 
+accountRouter.put("/account/:id", async (req, res) => {
+  const id = req.params.id;
+});
+
 accountRouter.post("/account", async (req, res) => {
   const newAccount: Account = req.body;
   try {
