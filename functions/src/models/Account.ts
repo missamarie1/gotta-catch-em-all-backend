@@ -1,6 +1,7 @@
 import { ObjectId } from "mongodb";
 
-interface Pokemon {
+export interface Pokemon {
+  id: number;
   name: string;
   image: string;
 }
