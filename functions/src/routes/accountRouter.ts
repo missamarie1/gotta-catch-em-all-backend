@@ -22,7 +22,7 @@ accountRouter.get("/account/:uid", async (req, res) => {
 });
 
 accountRouter.put("/account/:id", async (req, res) => {
-  const id: number = +req.params.id;
+  const id: string = req.params.id;
   const newPokemon: Pokemon = req.body;
   try {
     const client = await getClient();
