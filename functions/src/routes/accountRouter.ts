@@ -65,4 +65,22 @@ accountRouter.post("/account", async (req, res) => {
   }
 });
 
+accountRouter.delete("/account/:id", async (req, res) => {
+  const id: string = req.params.id;
+  try {
+    const client = await getClient();
+    const result = await client
+      .db()
+      .collection<Account>("accounts")
+      .deleteOne({ _id: new ObjectId(id) });
+    if (result.deletedCount === 0) {
+      res.status(404).json({ message: `ID not found` });
+    } else {
+      res.sendStatus(204);
+    }
+  } catch (err) {
+    errorResponse(err, res);
+  }
+});
+
 export default accountRouter;
