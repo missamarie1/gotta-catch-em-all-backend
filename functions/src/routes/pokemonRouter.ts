@@ -1,6 +1,6 @@
 import express from "express";
 import { getClient } from "../db";
-import { PokemonEasy } from "../models/Pokemon";
+import { Pokemon } from "../models/Pokemon";
 
 const pokemonRouter = express.Router();
 
@@ -13,11 +13,7 @@ export const errorResponse = (error: any, res: any) => {
 pokemonRouter.get("/", async (req, res) => {
   try {
     const client = await getClient();
-    const results = await client
-      .db()
-      .collection<PokemonEasy>("")
-      .find()
-      .toArray();
+    const results = await client.db().collection<Pokemon>("").find().toArray();
     res.json(results);
   } catch (err) {
     errorResponse(err, res);
@@ -27,11 +23,7 @@ pokemonRouter.get("/", async (req, res) => {
 pokemonRouter.get("/profile", async (req, res) => {
   try {
     const client = await getClient();
-    const results = await client
-      .db()
-      .collection<PokemonEasy>("")
-      .find()
-      .toArray();
+    const results = await client.db().collection<Pokemon>("").find().toArray();
     res.json(results);
   } catch (err) {
     errorResponse(err, res);
@@ -41,11 +33,7 @@ pokemonRouter.get("/profile", async (req, res) => {
 pokemonRouter.get("/leaderboard", async (req, res) => {
   try {
     const client = await getClient();
-    const results = await client
-      .db()
-      .collection<PokemonEasy>("")
-      .find()
-      .toArray();
+    const results = await client.db().collection<Pokemon>("").find().toArray();
     res.json(results);
   } catch (err) {
     errorResponse(err, res);
