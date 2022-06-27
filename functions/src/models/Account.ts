@@ -12,4 +12,5 @@ export interface Account {
   userName: string;
   avatar?: string;
   caught: Pokemon[];
+  totalScore: number;
 }
