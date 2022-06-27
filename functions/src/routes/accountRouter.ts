@@ -1,7 +1,7 @@
 import express from "express";
 import { ObjectId } from "mongodb";
 import { getClient } from "../db";
-import { Account, Pokemon } from "../models/Account";
+import { Account } from "../models/Account";
 import { errorResponse } from "./pokemonRouter";
 
 const accountRouter = express.Router();
@@ -43,7 +43,13 @@ accountRouter.put("/account/pokemon/:id", async (req, res) => {
     const result = await client
       .db()
       .collection<Account>("accounts")
-      .updateOne({ _id: new ObjectId(id) }, { $push: { caught: updatedAccountInfo.newPokemon }, $set: { totalScore: updatedAccountInfo.score } });
+      .updateOne(
+        { _id: new ObjectId(id) },
+        {
+          $push: { caught: updatedAccountInfo.newPokemon },
+          $inc: { totalScore: updatedAccountInfo.totalScore },
+        }
+      );
     if (result.modifiedCount) {
       res.status(200).json(updatedAccountInfo);
     } else {
@@ -53,7 +59,6 @@ accountRouter.put("/account/pokemon/:id", async (req, res) => {
     errorResponse(err, res);
   }
 });
-
 
 accountRouter.post("/account", async (req, res) => {
   const newAccount: Account = req.body;
