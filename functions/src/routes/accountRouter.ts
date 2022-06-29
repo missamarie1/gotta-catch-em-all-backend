@@ -59,6 +59,26 @@ accountRouter.put("/account/pokemon/:id", async (req, res) => {
     errorResponse(err, res);
   }
 });
+accountRouter.put("/account/update/:id", async (req, res) => {
+  const id: string = req.params.id;
+  const updatedAccountInfo: Account = req.body;
+  delete updatedAccountInfo._id;
+  try {
+    const client = await getClient();
+    const result = await client
+      .db()
+      .collection<Account>("accounts")
+      .replaceOne({ _id: new ObjectId(id) }, updatedAccountInfo);
+    if (result.modifiedCount) {
+      updatedAccountInfo._id = new ObjectId(id);
+      res.status(200).json(updatedAccountInfo);
+    } else {
+      res.status(404).json({ message: "ID not found" });
+    }
+  } catch (err) {
+    errorResponse(err, res);
+  }
+});
 
 accountRouter.post("/account", async (req, res) => {
   const newAccount: Account = req.body;
