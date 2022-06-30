@@ -9,7 +9,6 @@ export const errorResponse = (error: any, res: any) => {
   res.status(500).json({ message: "Internal Server Error" });
 };
 
-//change collectin name when created
 pokemonRouter.get("/", async (req, res) => {
   try {
     const client = await getClient();
